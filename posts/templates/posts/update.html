@@ -1,0 +1,22 @@
+{% extends 'posts/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Update Post{% endblock%}
+
+
+{% block content %}
+
+<div class="container">
+	<div class="form-group col-md-6 my-20 mx-auto border p-4">
+		<form method="POST">
+			{% csrf_token %}
+			{{ form | crispy }}
+			
+			<input class="btn btn-success" value="Update" type="submit">
+			<a class="btn btn-warning" href="{% url 'posts:index' %}">Cancel</a>
+			
+		</form>
+	</div>
+</div>
+{% endblock content %}

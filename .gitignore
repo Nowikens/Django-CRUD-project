@@ -1,0 +1,11 @@
+/posts/migrations
+/accounts/migrations
+/posts/__pycache__
+/defaultDjango/__pycache__
+/accounts/__pycache__
+
+/libenv 
+
+db.sqlite3
+
+.env

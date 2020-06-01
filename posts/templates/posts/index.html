@@ -1,0 +1,64 @@
+{% extends 'posts/base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Homepage{% endblock%}
+
+
+{% block content %}
+<div class="container">
+	<div class="col-md-5 mx-auto mb-5">
+		{% if user.is_authenticated %}
+		<button class="btn btn-primary offset-5" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+			New Post
+			</button>
+
+		<div class="collapse mb-5" id="collapseExample">
+
+			<form method="POST" class="mx-auto">
+				{% csrf_token %}
+				
+				{{ form | crispy }}
+				<button class="btn btn-success offset-5" type="submit">Post</button>
+			</form>
+		</div>
+		
+	</div>
+
+	<div class="col-md-10 mx-auto p-2 border">
+		{% for post in posts %}
+		<div class="col-md-12 mx-auto">
+			<div class="row p-2">
+				<div class="col">
+					<h4>{{ post.title }}</h5>
+				</div>
+				<div class="col-align-self-end">
+					<h5>by: {{ post.author }}</h5>
+				</div>
+			</div>
+			<div class=".text-break my-10 border p-5 text-wrap" style="word-wrap:break-word;">
+				<p>{{ post.content }}</p>
+			</div>
+			<div class="row border-bottom border-dark p-2">
+				<small class="mx-auto">posted {{ post.date_posted}}</small>
+			</div>
+			<div class="row m-1">
+				<a class="btn btn-warning" href="{% url 'posts:update-post' post.pk %}">Update Post</a>
+				<a class="btn btn-danger offset-8" href="{% url 'posts:delete-post' post.pk %}">Delete Post</a>
+			</div>
+		</div>
+		<br><br>
+		{% endfor %}
+
+
+{% else %}
+	<div class="col-md-6 mx-auto">
+	<p>You must be logged in to view content of this site</p> 
+		<a class="btn btn-success" href="{% url 'accounts:register-user' %}">Register</a>
+
+		<a class="btn btn-info" href="{% url 'accounts:login-user' %}">Login</a>	
+	</div>
+{% endif %}
+</div>
+</div>
+{% endblock content %}
