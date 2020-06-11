@@ -42,9 +42,11 @@
 			<div class="row border-bottom border-dark p-2">
 				<small class="mx-auto">posted {{ post.date_posted}}</small>
 			</div>
+			{% if request.user == post.author%}
 			<div class="row m-1">
 				<a class="btn btn-warning" href="{% url 'posts:update-post' post.pk %}">Update Post</a>
 				<a class="btn btn-danger offset-8" href="{% url 'posts:delete-post' post.pk %}">Delete Post</a>
+			{% endif %}
 			</div>
 		</div>
 		<br><br>

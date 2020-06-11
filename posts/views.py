@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
 
 from .models import Post
 from .forms import PostForm
 # Create your views here.
 
-
+@login_required
 def index(request):
     posts = Post.objects.all().order_by('-date_posted')
     form = PostForm()
@@ -25,6 +25,7 @@ def index(request):
     }
     return render(request, 'posts/index.html', context)
 
+@login_required
 def update_post(request, pk):
     post = Post.objects.get(pk=pk)
     form = PostForm(instance=post)
@@ -37,7 +38,8 @@ def update_post(request, pk):
         'form': form
     }
     return render(request, 'posts/update.html', context)
-    
+
+@login_required
 def delete_post(request, pk):
     post = Post.objects.get(pk=pk)
     

@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 
 from django.contrib import messages
 
+from django.contrib.auth.decorators import login_required
+
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
@@ -44,7 +46,7 @@ def logout_user(request):
     logout(request)
     return redirect('accounts:login-user')
     
-    
+@login_required
 def delete_user(request):
     pk = request.user.id
     user = User.objects.get(pk=pk)
