@@ -4,7 +4,7 @@ from . import views
 
 app_name = 'posts'
 urlpatterns = [
-    path('', views.index, name="index"),
-    path('update/<int:pk>', views.update_post, name="update-post"),
-    path('delete/<int:pk>', views.delete_post, name="delete-post"),
+    path('', views.IndexView.as_view(), name="index"),
+    path('update/<int:pk>', views.UpdateView.as_view(), name="update-post"),
+    path('delete/<int:pk>', views.DeletePost.as_view(), name="delete-post"),
 ]
