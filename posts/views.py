@@ -54,8 +54,6 @@ class UpdatePost(LoginRequiredMixin, UpdateView):
 class DeletePost(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = None
-    success_url = ('posts:index')
-    
     
     def get_success_url(self):
         return reverse('posts:index')

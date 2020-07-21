@@ -1,0 +1,30 @@
+{% extends 'posts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Confirm{% endblock%}
+
+{% block content %}
+
+<div class="container">
+	<div class="col-md-6 mx-auto">
+		<form method="POST">
+			{% csrf_token %}
+			<p>Are you sure?</p> 
+				<input type="submit" class="btn btn-danger col-md-4" value="Yes, delete">
+				<a class="btn btn-info" href="{% url 'posts:index' %}">No, take me back</a>
+		</form>
+		
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
